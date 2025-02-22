@@ -1,0 +1,13 @@
+{
+  "name": "simplepp-interpreter",
+  "version": "1.0.0",
+  "description": "An interpreter for Simple++ programming language.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js example.sp++"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "Simple++",
+  "license": "MIT"
+}
