@@ -1,18 +1,23 @@
 /* index.js - Simple++ Interpreter */
 const fs = require('fs');
 
+/**
+ * Parses Simple++ code and converts it to HTML.
+ * @param {string} code - The Simple++ code.
+ * @returns {string} - The generated HTML.
+ */
 function parseSimplePP(code) {
     let lines = code.split('\n');
     let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Simple++ Website</title><style>`;
     let body = `<body>`;
-    
+
     lines.forEach(line => {
         line = line.trim();
         if (line.startsWith('Simple+en')) {
             html += `body { font-family: Arial, sans-serif; margin: 0; padding: 0; }`;
         } else if (line.startsWith('(Top Bar')) {
             let color = line.match(/#Color:#([0-9A-Fa-f]+)/);
-            html += `nav { background-color: #${color[1]}; padding: 15px; display: flex; justify-content: center; } ul { list-style: none; padding: 0; margin: 0; display: flex; } ul li { margin: 0 15px; } a { color: white; text-decoration: none; font-weight: bold; }`;
+            html += `nav { background-color: #${color[1]}; padding: 15px; display: flex; justify-content: center; } ul { list-style: none; padding: 0; margin: 0; display: flex; } ul li { margin: 0 15px; }`;
             body += `<nav><ul>`;
         } else if (line.startsWith('(Item')) {
             let text = line.match(/#Text:"([^"]+)"/);
@@ -37,7 +42,7 @@ function parseSimplePP(code) {
             body += `${text[1]}</footer>`;
         }
     });
-    
+
     body += `</body></html>`;
     html += `</style></head>${body}`;
     return html;
